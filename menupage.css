@@ -1,0 +1,163 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+  }
+  
+  .sidebar {
+    width: 250px;
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #1a1a1a;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 20px;
+    z-index: 1;
+  }
+  
+  .sidebar ul {
+    /* list-style-type: none;
+    padding: 0; */
+    padding: 15px 20px;
+    font-size: 20px;
+  }
+  
+  .sidebar li {
+    padding: 12px 16px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #f1f1f1;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  .sidebar li a {
+    text-decoration: none;
+    color: #f1f1f1;
+    display: block;
+    align-items: center;
+    transition: background-color 0.3s;
+  }
+  
+  .sidebar li a:hover {
+    background-color: #333;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 30px;
+    color: #f1f1f1;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .close-btn:hover {
+    color: #ccc;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 50px;
+  }
+
+  .content .open-btn {
+    align-self: flex-start; 
+  }
+
+  .content .welcome-text {
+    font-size: 28px; 
+    margin: 0; 
+    position: absolute;
+    top: 20px; 
+    left: 50%; 
+    transform: translateX(-50%); 
+  }
+  
+  .open-btn {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px 15px;
+    background-color: #1a1a1a;
+    color: #f1f1f1;
+    border: none;
+  }
+  
+  .open-btn:hover {
+    background-color: #333;
+  }
+  
+  /* New styles for input section */
+  .input-section {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .input-section h2 {
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center; /* Center align the heading */
+  }
+  
+  .input-section p {
+    margin-bottom: 30px;
+    color: #666;
+    text-align: center; /* Center align the paragraph */
+  }
+  
+  input[type="file"],
+  button {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    background-color: #333;
+    color: #f1f1f1;
+    cursor: pointer;
+  }
+  
+  input[type="file"]:hover,
+  button:hover {
+    background-color: #555;
+  }
+  
+  .result-section {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f1f1f1;
+    color: #333;
+  }
+
+  .buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .login-button,
+  .signup-button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 10px;
+    text-decoration: none;
+    color: #fff;
+    background-color: #333;
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .login-button:hover,
+  .signup-button:hover {
+    background-color: #555;
+  }

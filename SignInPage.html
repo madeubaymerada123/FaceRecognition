@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="SignInPage.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-in">
+            <form>
+                <h1>Sign In</h1>
+                <div class="sign-in-methods">
+                    <button id="choose-picture">Choose Picture</button>
+                    <button id="access-camera">Access Camera</button>
+                </div>
+                <input type="file" accept="image/*" id="picture-input" style="display: none;">
+                <video id="camera-stream" style="display: none;"></video>
+                <input type="hidden" id="image-base64" name="image">
+                <a href="#">Forget Your Password?</a>
+                <button id="sign-up-button">Sign Up</button>
+            </form>
+        </div>
+    </div>
+    <script src="SignInPage.js"></script>
+</body>
+</html>
+

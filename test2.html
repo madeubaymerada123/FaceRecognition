@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Detection Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Age Detection Test</h1>
+    <input type="file" id="imageInput" accept="image/*">
+    <button onclick="detectAge()">Detect Age</button>
+    <div id="result"></div>
+
+    <textarea id="textToConvert" rows="4" cols="50" placeholder="Enter text..."></textarea>
+    <button onclick="convertTextToSpeech()">Convert to Speech</button>
+    <a id="downloadLink" style="display:none">Download Audio</a>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+      async function detectAge() {
+            const url = 'https://age-detector.p.rapidapi.com/age-detection';
+            const options = {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'X-RapidAPI-Key': 'a86d404f1amshe30d809d83f7b90p11e71bjsn80a2039d73e1',
+                    'X-RapidAPI-Host': 'age-detector.p.rapidapi.com'
+                },
+                body: JSON.stringify({
+                    url: 'https://th.bing.com/th/id/OIP.wRRWTb41bPP87omDMkBPSAAAAA?w=460&h=460&rs=1&pid=ImgDetMain'
+                })
+            };
+
+            try {
+                const response = await fetch(url, options);
+                const result = await response.json(); // Use response.json() instead of response.text()
+                console.log(result);
+            } catch (error) {
+                console.error(error);
+            }
+        }
+        async function convertTextToSpeech() {
+            const textToConvert = document.getElementById('textToConvert').value;
+            const url = 'https://joj-text-to-speech.p.rapidapi.com/';
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    'X-RapidAPI-Key': 'a86d404f1amshe30d809d83f7b90p11e71bjsn80a2039d73e1',
+                    'X-RapidAPI-Host': 'joj-text-to-speech.p.rapidapi.com'
+                },
+                body: JSON.stringify({
+                    input: {
+                        text: inputText // Gunakan nilai input sebagai teks untuk Text-to-Speech
+                    },
+                    voice: {
+                        languageCode: 'en-US',
+                        name: 'en-US-News-L',
+                        ssmlGender: 'FEMALE'
+                    },
+                    audioConfig: {
+                        audioEncoding: 'MP3'
+                    }
+                })
+            };
+
+            try {
+                const response = await fetch(url, options);
+                const result = await response.json();
+                if (data && data.audioContent) {
+                    const audioContent = data.audioContent;
+                    const blob = base64toBlob(audioContent, 'audio/mp3');
+                    const url = URL.createObjectURL(blob);
+
+                    // Display the download link
+                    const downloadLink = document.getElementById('downloadLink');
+                    downloadLink.href = url;
+                    downloadLink.download = 'converted_audio.mp3';
+                    downloadLink.style.display = 'block';
+                }
+            } catch (error) {
+                console.error(error);
+            }
+
+            
+        }
+
+        function base64toBlob(base64Data, contentType) {
+            contentType = contentType || '';
+            const sliceSize = 1024;
+            const byteCharacters = atob(base64Data);
+            const bytesLength = byteCharacters.length;
+            const slicesCount = Math.ceil(bytesLength / sliceSize);
+            const byteArrays = new Array(slicesCount);
+
+            for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+                const begin = sliceIndex * sliceSize;
+                const end = Math.min(begin + sliceSize, bytesLength);
+
+                const bytes = new Array(end - begin);
+                for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+                    bytes[i] = byteCharacters[offset].charCodeAt(0);
+                }
+
+                byteArrays[sliceIndex] = new Uint8Array(bytes);
+            }
+
+            return new Blob(byteArrays, { type: contentType });
+        }
+    </script>
+</body>
+</html>
